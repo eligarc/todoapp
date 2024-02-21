@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   Injector,
@@ -14,7 +14,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

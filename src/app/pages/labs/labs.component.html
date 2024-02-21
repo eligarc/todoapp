@@ -2,7 +2,9 @@
   <h1>Hola este mi primer proyecto!</h1>
   <h2>{{ title }}</h2>
   <ul>
-    <li *ngFor="let task of tasks()">{{ task }}</li>
+    @for (task of tasks(); track task) {
+    <li>{{ task }}</li>
+    }
   </ul>
   <hr />
   <h2>{{ "Hola".repeat(4) }}</h2>
@@ -47,36 +49,53 @@
   <br />
   <ul>
     <p>{{ tasks().length }}</p>
-    <li *ngFor="let task of tasks(); index as i">{{ i }} {{ task }}</li>
+    @for (task of tasks(); track task; let i = $index) {
+    <li>{{ i }} {{ task }}</li>
+    }
   </ul>
   <p>(signal)</p>
   <input type="text" [value]="name()" (change)="changeHandler($event)" />
   <br />
 
-  <div *ngIf="1 !== 1">My Content</div>
-
-  <div *ngIf="name() === 'Elio'">Soy Elioenai</div>
-
+  @if (1 !== 1) {
+  <div>My Content</div>
+  } @if (name() === 'Elio') {
+  <div>Soy Elioenai</div>
+  } @if (name() === 'Elio') {
+  <div>Soy Elioenai...</div>
+  }
   <input
     type="number"
     [value]="person().age"
     (change)="changeHandlerAge($event)"
   />
 
-  <div *ngIf="person().name === 'Elio' && person().age > 18; else elseBlock">
-    Soy Elioenai y soy mayor de edad
-  </div>
+  @if (person().name === 'Elio' && person().age > 18) {
+  <div>Soy Elioenai y soy mayor de edad</div>
+  } @else { Soy Elioenai y soy menor de edad }
 
-  <ng-template #elseBlock> Soy Elioenai y soy menor de edad </ng-template>
+  <!-- Nueva sintaxis if-else-->
+  <h2>If-else new sintax</h2>
+  @if (person().name === 'Elio' && person().age > 18) {
+  <div>Soy Elioenai y soy mayor de edad</div>
+  } @else {
+  <div><strong>Soy Elioenai y soy menor de edad</strong></div>
+  }
 
   <hr />
   <input type="text" [value]="person().name" (change)="changeName($event)" />
-  <div [ngSwitch]="person().name">
-    <p *ngSwitchCase="'Elio'">Yo soy elio</p>
-    <p *ngSwitchCase="'Angy'">Yo soy angy</p>
-    <p *ngSwitchCase="'Ana'">Yo soy ana</p>
-    <p *ngSwitchCase="'Miguel'">Yo soy miguel</p>
-    <p *ngSwitchDefault>yo no soy nadie</p>
+  <div>
+    @switch (person().name) { @case ('Elio') {
+    <p>Yo soy elio</p>
+    } @case ('Angy') {
+    <p>Yo soy angy</p>
+    } @case ('Ana') {
+    <p>Yo soy ana</p>
+    } @case ('Miguel') {
+    <p>Yo soy miguel</p>
+    } @default {
+    <p>yo no soy nadie</p>
+    } }
   </div>
 
   <hr />
@@ -110,4 +129,47 @@
   <p>
     <input type="text" />
   </p>
+  <br />
+  <h2>New for</h2>
+  <ul>
+    <p>Total: {{ tasks().length }}</p>
+    @for (task of tasks(); track task; let i = $index) {
+    <li>{{ i }} {{ task }}</li>
+    }
+  </ul>
+  <ul>
+    @for (task of tasks(); track task; let i = $index) {
+    <li>{{ i }} {{ task }}</li>
+    } @empty {
+    <li><strong>La lista está en vacío</strong></li>
+    }
+  </ul>
+
+  <hr />
+  <h2>New switch</h2>
+  <div>
+    @switch (person().name) { @case ('Elio') {
+    <p>Yo soy elio</p>
+    } @case ('Angy') {
+    <p>Yo soy angy</p>
+    } @case ('Ana') {
+    <p>Yo soy ana</p>
+    } @case ('Miguel') {
+    <p>Yo soy miguel</p>
+    } @default {
+    <p>yo no soy nadie</p>
+    } }
+  </div>
+
+  <div>
+    @switch (person().name) { @case ('Elio') {
+    <p>Yo soy Elio</p>
+    } @case ('Angy') {
+    <p>Yo soy Angy</p>
+    } @case ('Miguel') {
+    <p>Yo soy miguel</p>
+    } @default {
+    <p>Yo no soy nadie</p>
+    } }
+  </div>
 </div>
