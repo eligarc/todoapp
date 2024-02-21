@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     validators: [
       Validators.required,
       Validators.minLength(3),
-      Validators.pattern('^[A-Za-z0-9?,_-](s?[A-Za-z0-9?,_-]+)*$'),
+      Validators.pattern('^\\S.*$'),
     ],
   });
 
@@ -74,7 +74,6 @@ export class HomeComponent implements OnInit {
     effect(
       () => {
         const tasks = this.tasks();
-        console.log(tasks);
         localStorage.setItem('tasks', JSON.stringify(tasks));
       },
       { injector: this.injector }
